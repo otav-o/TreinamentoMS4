@@ -3,6 +3,24 @@ import Cartao from './Cartao';
 import Mensagem from './Mensagem';
 
 const App = () => {
+        return(
+            <div>
+                <strong>Último botão clicado:</strong>
+                <br></br>
+                <strong>Quantidade de cliques:</strong>
+                <div>
+                    <button>Botão 1</button>
+                    <button>Botão 2</button>
+                    <button>Botão 3</button>
+                </div>
+                
+            </div>
+        );
+}
+
+
+{/*
+const App = () => {
     return (
         <div>
             { // chaves para digitar código js
@@ -21,6 +39,7 @@ const App = () => {
     )
 };
 
+*/}
 const dados = [
     {
         foto:'https://avatars.githubusercontent.com/u/60331508?s=400&u=5e3e24f7a44c259c4ea48dfa040fd7e314f9bc6e&v=4', 
