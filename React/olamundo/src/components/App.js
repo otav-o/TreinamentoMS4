@@ -9,6 +9,14 @@ class App extends React.Component { // copmponente pode ser uma classe ou funç�
             this.state = {ultimoClicado: 'nenhum', qtdeCliques: 0} // state é um objeto
         }
 
+        onClick = (e) => { // usar arrow function!
+            console.log(e);
+            this.setState({
+                ultimoClicado: e.target.innerText, 
+                qtdeCliques: this.state.qtdeCliques + 1
+            });
+        }
+
         render (){
             return(
                 <div>
@@ -16,9 +24,9 @@ class App extends React.Component { // copmponente pode ser uma classe ou funç�
                     <br></br>
                     <strong>Quantidade de cliques: {this.state.qtdeCliques}</strong>
                     <div>
-                        <button onClick={() => this.setState({ultimoClicado: 'Botão 1', qtdeCliques: this.state.qtdeCliques + 1})}>Botão 1</button>
-                        <button onClick={() => this.setState({ultimoClicado: 'Botão 2', qtdeCliques: this.state.qtdeCliques + 1})}>Botão 2</button>
-                        <button onClick={() => this.setState({ultimoClicado: 'Botão 3', qtdeCliques: this.state.qtdeCliques + 1})}>Botão 3</button>
+                        <button onClick={this.onClick}>Botão 1</button> 
+                        <button onClick={this.onClick}>Botão 2</button>
+                        <button onClick={this.onClick}>Botão 3</button>
                     </div>
                     
                 </div>
