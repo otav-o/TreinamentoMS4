@@ -3,12 +3,18 @@ import Cartao from './Cartao';
 import Mensagem from './Mensagem';
 
 class App extends React.Component { // copmponente pode ser uma classe ou função
+    
+        constructor(props) {
+            super(props);
+            this.state = {ultimoClicado: 'nenhum', qtdeCliques: 0} // state é um objeto
+        }
+
         render (){
             return(
                 <div>
-                    <strong>Último botão clicado:</strong>
+                    <strong>Último botão clicado: {this.state.ultimoClicado}</strong>
                     <br></br>
-                    <strong>Quantidade de cliques:</strong>
+                    <strong>Quantidade de cliques: {this.state.qtdeCliques}</strong>
                     <div>
                         <button>Botão 1</button>
                         <button>Botão 2</button>
