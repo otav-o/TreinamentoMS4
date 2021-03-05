@@ -2,20 +2,22 @@ import React from 'react';
 import Cartao from './Cartao';
 import Mensagem from './Mensagem';
 
-const App = () => {
-        return(
-            <div>
-                <strong>Último botão clicado:</strong>
-                <br></br>
-                <strong>Quantidade de cliques:</strong>
+class App extends React.Component { // copmponente pode ser uma classe ou função
+        render (){
+            return(
                 <div>
-                    <button>Botão 1</button>
-                    <button>Botão 2</button>
-                    <button>Botão 3</button>
+                    <strong>Último botão clicado:</strong>
+                    <br></br>
+                    <strong>Quantidade de cliques:</strong>
+                    <div>
+                        <button>Botão 1</button>
+                        <button>Botão 2</button>
+                        <button>Botão 3</button>
+                    </div>
+                    
                 </div>
-                
-            </div>
-        );
+            );
+        } // se for uma classe, o retorno deve estar dentro do método render
 }
 
 
