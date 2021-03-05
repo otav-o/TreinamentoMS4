@@ -1,16 +1,14 @@
 import React from 'react';
 import Cartao from './Cartao';
+import Mensagem from './Mensagem';
 
 const App = () => {
-    //return <div>Olá mundo!</div>;
-    //return <Cartao />
+    const nome = 'Otávio';
     return (
         <div>
-            <Cartao />
-            <Cartao />
+            <Mensagem nome={nome}></Mensagem>
         </div>
-    ); // retornar jsx com muitas linhas: usar parênteses
-
+    )
 };
 
 export default App;
