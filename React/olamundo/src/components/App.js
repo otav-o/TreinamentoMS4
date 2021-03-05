@@ -16,14 +16,16 @@ class App extends React.Component { // copmponente pode ser uma classe ou funç�
                     <br></br>
                     <strong>Quantidade de cliques: {this.state.qtdeCliques}</strong>
                     <div>
-                        <button>Botão 1</button>
-                        <button>Botão 2</button>
-                        <button>Botão 3</button>
+                        <button onClick={() => this.setState({ultimoClicado: 'Botão 1', qtdeCliques: this.state.qtdeCliques + 1})}>Botão 1</button>
+                        <button onClick={() => this.setState({ultimoClicado: 'Botão 2', qtdeCliques: this.state.qtdeCliques + 1})}>Botão 2</button>
+                        <button onClick={() => this.setState({ultimoClicado: 'Botão 3', qtdeCliques: this.state.qtdeCliques + 1})}>Botão 3</button>
                     </div>
                     
                 </div>
             );
         } // se for uma classe, o retorno deve estar dentro do método render
+        // ao executar o setState, o método render() é chamado, é criado um DOM virtual e o componente em questão é atualizado.
+        // passa-se um objeto para setState() com as propriedades que se quer alterar
 }
 
 
