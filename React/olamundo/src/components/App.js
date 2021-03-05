@@ -6,7 +6,7 @@ const App = () => {
     const nome = 'Otávio';
     return (
         <div>
-            <Mensagem nome={nome}></Mensagem>
+            <Mensagem nome={nome} mensagem='bem vindo!'></Mensagem>
         </div>
     )
 };
