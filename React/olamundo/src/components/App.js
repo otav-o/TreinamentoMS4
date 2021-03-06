@@ -2,24 +2,37 @@ import React from 'react';
 import Cartao from './Cartao';
 import Mensagem from './Mensagem';
 
-const App = () => {
-    return (
-        <div>
-            { // chaves para digitar código js
-                dados.map(x => { // tudo depois do arrow e entre chaves é retornado. Map para percorrer o vetor
-                    return <Cartao 
-                        foto={x.foto}
-                        nome={x.nome}
-                        membroDesde={x.membroDesde}
-                        descricao={x.descricao}
-                        numeroAmigos={x.numeroAmigos}
-                    />
-                })
-            }
-           
-        </div>
-    )
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {objetos: [], status: STATUS_CARREGANDO};
+    }
+    render() {
+        if(this.state.status == STATUS_CARREGANDO) {
+            setTimeout(() => this.setState({objetos: dados, status: STATUS_PRONTO}), 2000);
+            return <div>Carregando...</div>;
+        }
+        return (
+            <div>
+                {
+                    this.state.objetos.map(x => { // tudo depois do arrow e entre chaves é retornado. Map para percorrer o vetor
+                        return <Cartao 
+                            foto={x.foto}
+                            nome={x.nome}
+                            membroDesde={x.membroDesde}
+                            descricao={x.descricao}
+                            numeroAmigos={x.numeroAmigos}
+                        />
+                    })
+                }
+            
+            </div>
+        )
+    }
 };
+
+const STATUS_CARREGANDO = 0;
+const STATUS_PRONTO = 1;
 
 
 const dados = [
