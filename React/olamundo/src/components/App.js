@@ -2,42 +2,6 @@ import React from 'react';
 import Cartao from './Cartao';
 import Mensagem from './Mensagem';
 
-class App extends React.Component { // copmponente pode ser uma classe ou função
-    
-        constructor(props) {
-            super(props);
-            this.state = {ultimoClicado: 'nenhum', qtdeCliques: 0} // state é um objeto
-        }
-
-        onClick = (e) => { // usar arrow function!
-            console.log(e);
-            this.setState({
-                ultimoClicado: e.target.innerText, 
-                qtdeCliques: this.state.qtdeCliques + 1
-            });
-        }
-
-        render (){
-            return(
-                <div>
-                    <strong>Último botão clicado: {this.state.ultimoClicado}</strong>
-                    <br></br>
-                    <strong>Quantidade de cliques: {this.state.qtdeCliques}</strong>
-                    <div>
-                        <button onClick={this.onClick}>Botão 1</button> 
-                        <button onClick={this.onClick}>Botão 2</button>
-                        <button onClick={this.onClick}>Botão 3</button>
-                    </div>
-                    
-                </div>
-            );
-        } // se for uma classe, o retorno deve estar dentro do método render
-        // ao executar o setState, o método render() é chamado, é criado um DOM virtual e o componente em questão é atualizado.
-        // passa-se um objeto para setState() com as propriedades que se quer alterar
-}
-
-
-{/*
 const App = () => {
     return (
         <div>
@@ -57,7 +21,7 @@ const App = () => {
     )
 };
 
-*/}
+
 const dados = [
     {
         foto:'https://avatars.githubusercontent.com/u/60331508?s=400&u=5e3e24f7a44c259c4ea48dfa040fd7e314f9bc6e&v=4', 
@@ -83,3 +47,40 @@ const dados = [
 ]
 
 export default App;
+
+/*
+class App extends React.Component { // copmponente pode ser uma classe ou função
+
+    constructor(props) {
+        super(props);
+        this.state = {ultimoClicado: 'nenhum', qtdeCliques: 0} // state é um objeto
+    }
+
+    onClick = (e) => { // usar arrow function!
+        console.log(e);
+        this.setState({
+            ultimoClicado: e.target.innerText, 
+            qtdeCliques: this.state.qtdeCliques + 1
+        });
+    }
+
+    render (){
+        return(
+            <div>
+                <strong>Último botão clicado: {this.state.ultimoClicado}</strong>
+                <br></br>
+                <strong>Quantidade de cliques: {this.state.qtdeCliques}</strong>
+                <div>
+                    <button onClick={this.onClick}>Botão 1</button> 
+                    <button onClick={this.onClick}>Botão 2</button>
+                    <button onClick={this.onClick}>Botão 3</button>
+                </div>
+                
+            </div>
+        );
+    } // se for uma classe, o retorno deve estar dentro do método render
+    // ao executar o setState, o método render() é chamado, é criado um DOM virtual e o componente em questão é atualizado.
+    // passa-se um objeto para setState() com as propriedades que se quer alterar
+}
+
+*/
