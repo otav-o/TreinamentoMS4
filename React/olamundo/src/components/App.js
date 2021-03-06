@@ -15,7 +15,7 @@ class App extends React.Component {
 
     render() {
         if(this.state.status == STATUS_CARREGANDO) {
-            return <Loader></Loader>; // lembrar que o setState() chama o render() novamente
+            return <Loader mensagem="Aguarde"></Loader>; // lembrar que o setState() chama o render() novamente
         }
         return (
             <div>
