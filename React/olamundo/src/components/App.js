@@ -11,7 +11,7 @@ class App extends React.Component {
     componentDidMount() { // método executado assim que o componente é montado
         setTimeout(() => this.setState({objetos: dados, status: STATUS_PRONTO}), 2000); // simula uma requisição à API
     }
-    
+
     render() {
         if(this.state.status == STATUS_CARREGANDO) {
             return <div>Carregando...</div>; // lembrar que o setState() chama o render() novamente
@@ -21,6 +21,7 @@ class App extends React.Component {
                 {
                     this.state.objetos.map(x => { // tudo depois do arrow e entre chaves é retornado. Map para percorrer o vetor
                         return <Cartao 
+                            key={x.id} // elimina o warning da lista de cartões sem key
                             foto={x.foto}
                             nome={x.nome}
                             membroDesde={x.membroDesde}
@@ -41,6 +42,7 @@ const STATUS_PRONTO = 1;
 
 const dados = [
     {
+        id: 'abcde',
         foto:'https://avatars.githubusercontent.com/u/60331508?s=400&u=5e3e24f7a44c259c4ea48dfa040fd7e314f9bc6e&v=4', 
         nome:'Otávio' ,
         membroDesde:'2021' ,
@@ -48,6 +50,7 @@ const dados = [
         numeroAmigos:'10'
     },
     {
+        id: 'fghij',
         foto:'https://upload.wikimedia.org/wikipedia/commons/8/82/Pronunciamento_do_Presidente_da_Rep%C3%BAblica%2C_Jair_Bolsonaro_%28cropped%29.jpg', 
         nome:'Jair Messias' ,
         membroDesde:'2010' ,
@@ -55,6 +58,7 @@ const dados = [
         numeroAmigos:'150'
     },
     {
+        id: 'klmno',
         foto:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoywzbgRHSNs9E9i_UCNWE6HMAFm_g7pL0ZA&usqp=CAU', 
         nome:'Dilma Rousseff' ,
         membroDesde:'2007' ,
