@@ -7,10 +7,14 @@ class App extends React.Component {
         super(props);
         this.state = {objetos: [], status: STATUS_CARREGANDO};
     }
+
+    componentDidMount() { // método executado assim que o componente é montado
+        setTimeout(() => this.setState({objetos: dados, status: STATUS_PRONTO}), 2000); // simula uma requisição à API
+    }
+    
     render() {
         if(this.state.status == STATUS_CARREGANDO) {
-            setTimeout(() => this.setState({objetos: dados, status: STATUS_PRONTO}), 2000);
-            return <div>Carregando...</div>;
+            return <div>Carregando...</div>; // lembrar que o setState() chama o render() novamente
         }
         return (
             <div>
