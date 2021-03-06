@@ -1,5 +1,6 @@
 import React from 'react';
 import Cartao from './Cartao';
+import Loader from './Loader';
 import Mensagem from './Mensagem';
 
 class App extends React.Component {
@@ -14,7 +15,7 @@ class App extends React.Component {
 
     render() {
         if(this.state.status == STATUS_CARREGANDO) {
-            return <div>Carregando...</div>; // lembrar que o setState() chama o render() novamente
+            return <Loader></Loader>; // lembrar que o setState() chama o render() novamente
         }
         return (
             <div>
