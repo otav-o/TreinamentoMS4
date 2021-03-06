@@ -1,7 +1,7 @@
 import React from 'react';
 import Cartao from './Cartao';
 import Loader from './Loader';
-import Mensagem from './Mensagem';
+import api from '../apis/api';
 
 class App extends React.Component {
     constructor(props) {
@@ -10,7 +10,10 @@ class App extends React.Component {
     }
 
     componentDidMount() { // método executado assim que o componente é montado
-        setTimeout(() => this.setState({objetos: dados, status: STATUS_PRONTO}), 2000); // simula uma requisição à API
+        api.get("dados") // get é para trazer algo de um serviço
+            .then(x => {
+                this.setState({objetos: x.data, status: STATUS_PRONTO})
+            }); 
     }
 
     render() {
@@ -39,34 +42,6 @@ class App extends React.Component {
 
 const STATUS_CARREGANDO = 0;
 const STATUS_PRONTO = 1;
-
-
-const dados = [
-    {
-        id: 'abcde',
-        foto:'https://avatars.githubusercontent.com/u/60331508?s=400&u=5e3e24f7a44c259c4ea48dfa040fd7e314f9bc6e&v=4', 
-        nome:'Otávio' ,
-        membroDesde:'2021' ,
-        descricao:'Frase qualquer', 
-        numeroAmigos:'10'
-    },
-    {
-        id: 'fghij',
-        foto:'https://upload.wikimedia.org/wikipedia/commons/8/82/Pronunciamento_do_Presidente_da_Rep%C3%BAblica%2C_Jair_Bolsonaro_%28cropped%29.jpg', 
-        nome:'Jair Messias' ,
-        membroDesde:'2010' ,
-        descricao:'Frase qualquer' ,
-        numeroAmigos:'150'
-    },
-    {
-        id: 'klmno',
-        foto:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoywzbgRHSNs9E9i_UCNWE6HMAFm_g7pL0ZA&usqp=CAU', 
-        nome:'Dilma Rousseff' ,
-        membroDesde:'2007' ,
-        descricao:'Frase qualquer' ,
-        numeroAmigos:'0'
-    }
-]
 
 export default App;
 
