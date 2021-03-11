@@ -23,14 +23,14 @@ namespace TesteWebApi.Controllers
 
         // GET: api/Aluno
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Aluno>>> GetAluno()
+        public async Task<ActionResult<IEnumerable<Aluno>>> GetAluno() // obter uma lista de alunos
         {
             return await _context.Aluno.ToListAsync();
         }
 
         // GET: api/Aluno/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Aluno>> GetAluno(string id)
+        public async Task<ActionResult<Aluno>> GetAluno(string id) //retornar um único aluno
         {
             var aluno = await _context.Aluno.FindAsync(id);
 
@@ -45,18 +45,18 @@ namespace TesteWebApi.Controllers
         // PUT: api/Aluno/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAluno(string id, Aluno aluno)
+        public async Task<IActionResult> PutAluno(string id, Aluno aluno) // modificar um aluno
         {
             if (id != aluno.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(aluno).State = EntityState.Modified;
+            _context.Entry(aluno).State = EntityState.Modified; // muda o estado para modificado: está pronto para ser alterado na base de dados
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(); // async
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -102,7 +102,7 @@ namespace TesteWebApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAluno(string id)
         {
-            var aluno = await _context.Aluno.FindAsync(id);
+            var aluno = await _context.Aluno.FindAsync(id); // obtido do EF
             if (aluno == null)
             {
                 return NotFound();
@@ -116,7 +116,7 @@ namespace TesteWebApi.Controllers
 
         private bool AlunoExists(string id)
         {
-            return _context.Aluno.Any(e => e.Id == id);
+            return _context.Aluno.Any(e => e.Id == id); // apenas checa
         }
     }
 }
