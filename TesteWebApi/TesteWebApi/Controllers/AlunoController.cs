@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TesteWebApi.DTOs;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TesteWebApi.Data;
 using TesteWebApi.Models;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TesteWebApi.Controllers
 {
@@ -14,80 +14,109 @@ namespace TesteWebApi.Controllers
     [ApiController]
     public class AlunoController : ControllerBase
     {
-        // GET: api/<AlunoController>
+        private readonly TesteWebApiContext _context;
+
+        public AlunoController(TesteWebApiContext context)
+        {
+            _context = context;
+        }
+
+        // GET: api/Aluno
         [HttpGet]
-        public ActionResult<IEnumerable<AlunoDTO>> Get()
+        public async Task<ActionResult<IEnumerable<Aluno>>> GetAluno()
         {
-            return alunos.Select(x => new AlunoDTO(x)).ToArray(); // expressão lambda cria uma nova coleção de AlunoDTO a partir de Aluno
-            // já retorna um json
+            return await _context.Aluno.ToListAsync();
         }
 
-        // GET api/<AlunoController>/5  https://localhost:44302/api/aluno/A3
+        // GET: api/Aluno/5
         [HttpGet("{id}")]
-        public ActionResult<AlunoDTO> GetById(string id) // o que importa é o attribute, e não o nome do método
+        public async Task<ActionResult<Aluno>> GetAluno(string id)
         {
-            var obj = alunos.Where(x => x.Id == id).FirstOrDefault();
+            var aluno = await _context.Aluno.FindAsync(id);
 
-            if (obj == null)
+            if (aluno == null)
+            {
                 return NotFound();
+            }
 
-            return new AlunoDTO(obj); // receber e retornar DTOs, e não as entidades
-        } 
-
-        // POST api/<AlunoController>
-        [HttpPost]
-        public ActionResult<Aluno> Post([FromBody] AlunoDTO objDTO)
-        {
-            var ultimaMatricula = alunos.Max(x => x.Matricula);
-
-            var objNovo = new Aluno();
-            objNovo.Id = Guid.NewGuid().ToString();
-            objNovo.Matricula = ultimaMatricula + 1; // não é o ideal!
-            objNovo.Nome = objDTO.Nome;
-
-            alunos.Add(objNovo);
-
-            return CreatedAtAction(nameof(GetById), new { id = objNovo.Id }, new AlunoDTO(objNovo)); // nameof retorna o nome do método
-        } //r etorna o objeto e onde ele é obtido
-
-        // PUT api/<AlunoController>/5
-        [HttpPut("{id}")]
-        public ActionResult<Aluno> Put(string id, [FromBody] AlunoDTO objDto) // alteração: id do objeto a ser alterado e obj com as novas propriedades
-        {
-            if (id != objDto.Id)
-                return BadRequest(); // retorna o erro 400
-
-            var obj = alunos.Where(x => x.Id == id).FirstOrDefault();
-
-            if (obj == null)
-                return NotFound();
-
-            obj.Nome = objDto.Nome;
-
-            return NoContent(); // status 204
-
-            // não dá para testar pelo navegador, só pelo PostMan
-
+            return aluno;
         }
 
-        // DELETE api/<AlunoController>/5
-        [HttpDelete("{id}")]
-        public ActionResult Delete(string id)
+        // PUT: api/Aluno/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAluno(string id, Aluno aluno)
         {
-            var obj = alunos.Where(x => x.Id == id).FirstOrDefault();
-            if (obj == null)
-                return NotFound();
+            if (id != aluno.Id)
+            {
+                return BadRequest();
+            }
 
-            alunos.Remove(obj);
+            _context.Entry(aluno).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AlunoExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return NoContent();
         }
 
-        private static IList<Aluno> alunos = new List<Aluno>
+        // POST: api/Aluno
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<Aluno>> PostAluno(Aluno aluno)
         {
-            new Aluno {Id = "A1", Matricula = 123, Nome = "Ana"},
-            new Aluno {Id = "A2", Matricula = 124, Nome = "Bruno"},
-            new Aluno {Id = "A3", Matricula = 125, Nome = "Carlos"}
-        };
+            _context.Aluno.Add(aluno);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (AlunoExists(aluno.Id))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtAction("GetAluno", new { id = aluno.Id }, aluno);
+        }
+
+        // DELETE: api/Aluno/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAluno(string id)
+        {
+            var aluno = await _context.Aluno.FindAsync(id);
+            if (aluno == null)
+            {
+                return NotFound();
+            }
+
+            _context.Aluno.Remove(aluno);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool AlunoExists(string id)
+        {
+            return _context.Aluno.Any(e => e.Id == id);
+        }
     }
 }
