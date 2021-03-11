@@ -12,7 +12,7 @@ namespace TesteWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AlunoController : ControllerBase
+    public class XXAlunoController : ControllerBase
     {
         // GET: api/<AlunoController>
         [HttpGet]
