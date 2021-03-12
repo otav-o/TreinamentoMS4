@@ -11,4 +11,4 @@ class Sobre extends React.Component {
     }
 }
 
-export default App;
+export default Sobre;

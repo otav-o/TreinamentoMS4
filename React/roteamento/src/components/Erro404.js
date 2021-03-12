@@ -6,4 +6,4 @@ class Erro404 extends React.Component {
     }
 }
 
-export default App;
+export default Erro404;
