@@ -6,14 +6,22 @@ import ContatoLista from './ContatoLista';
 class ContatoCrud extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { objetos: contatos }; // contatos no estado do objeto
+        this.state = { objetos: contatos, objetoSelecionado: null }; // contatos no estado do objeto
     }
-    
+
+    consultar = (objeto) => {
+        console.log("objeto selecionado:");
+        console.log(objeto);
+        this.setState({objetoSelecionado: {objeto}})
+        // mudar estado da propriedade somente com o setState
+    };
+
     render() {
         return (
             <div>
                 <h1>Contatos</h1>
-                <ContatoLista objetos={this.state.objetos}/>
+                <button className='tiny ui green button'>Incluir</button>
+                <ContatoLista objetos={this.state.objetos} consultar={this.consultar}/>
             </div>
         );
     }
