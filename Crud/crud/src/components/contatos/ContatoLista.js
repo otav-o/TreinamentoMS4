@@ -1,30 +1,30 @@
 import React from 'react';
 
 class ContatoLista extends React.Component {
+    renderItens() { // retornar um mapeamento do vetor de contatos
+        return(
+            contatos.map(x => { // para cado contato x, retornar o JSX abaixo
+                return (
+                    <tr>
+                        <td>{x.Nome}</td>
+                        <td>{x.Numero}</td>
+                    </tr>
+                );
+            })
+        );
+    }
+
     renderLista() { // subrotina para renderizar a lista
         return ( // copiado de semantic-ui.com
             <table className="ui celled table">
                 <thead>
-                    <tr><th>Name</th>
-                    <th>Age</th>
-                    <th>Job</th>
-                </tr></thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Número</th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <tr>
-                    <td data-label="Name">James</td>
-                    <td data-label="Age">24</td>
-                    <td data-label="Job">Engineer</td>
-                    </tr>
-                    <tr>
-                    <td data-label="Name">Jill</td>
-                    <td data-label="Age">26</td>
-                    <td data-label="Job">Engineer</td>
-                    </tr>
-                    <tr>
-                    <td data-label="Name">Elyse</td>
-                    <td data-label="Age">24</td>
-                    <td data-label="Job">Designer</td>
-                    </tr>
+                    {this.renderItens()}
                 </tbody>
             </table>
         );
@@ -32,7 +32,7 @@ class ContatoLista extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='ui-container'>
                 <h1>Contatos</h1>
                 {this.renderLista()}
             </div>
