@@ -1,10 +1,10 @@
 import React from 'react';
-import ContatoLista from './contatos/ContatoLista'
+import ContatoCrud from './contatos/ContatoCrud'
 
 class App extends React.Component {
     render() {
         return (
-            <ContatoLista/>
+            <ContatoCrud/>
         );
     }
 }

@@ -1,9 +1,13 @@
 import React from 'react';
 
 class ContatoLista extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
     renderItens() { // retornar um mapeamento do vetor de contatos
         return(
-            contatos.map(x => { // para cado contato x, retornar o JSX abaixo
+            this.props.objetos.map(x => { // para cado contato x, retornar o JSX abaixo
                 return (
                     <tr key={x.ContatoId}>
                         <td>{x.Nome}</td>
@@ -17,7 +21,7 @@ class ContatoLista extends React.Component {
         );
     }
 
-    renderLista() { // subrotina para renderizar a lista
+    render() { 
         return (
             <table className="ui celled table">
                 <thead>
@@ -33,23 +37,9 @@ class ContatoLista extends React.Component {
             </table>
         );
     } 
-
-    render() {
-        return (
-            <div className='ui container'>
-                <h1>Contatos</h1>
-                {this.renderLista()}
-            </div>
-        )
-    }
 }
 
 export default ContatoLista;
 
-const contatos = [
-    { ContatoId: 'a', Nome: 'Ana', Numero: '(11)1111-1111' },
-    { ContatoId: 'b', Nome: 'Bruno', Numero: '(22)2222-2222' },
-    { ContatoId: 'C', Nome: 'Carlos', Numero: '(33)3333-3333' },
-];
 
 // representa uma lista de contatos
