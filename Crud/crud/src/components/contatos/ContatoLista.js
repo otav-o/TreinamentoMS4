@@ -8,6 +8,9 @@ class ContatoLista extends React.Component {
                     <tr key={x.ContatoId}>
                         <td>{x.Nome}</td>
                         <td>{x.Numero}</td>
+                        <button className='tiny ui grey button'>Consultar</button>
+                        <button className='tiny ui blue button'>Alterar</button>
+                        <button className='tiny ui red button'>Excluir</button>
                     </tr>
                 );
             })
@@ -15,12 +18,13 @@ class ContatoLista extends React.Component {
     }
 
     renderLista() { // subrotina para renderizar a lista
-        return ( // copiado de semantic-ui.com
+        return (
             <table className="ui celled table">
                 <thead>
                     <tr>
                         <th>Nome</th>
                         <th>Número</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
