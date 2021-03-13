@@ -5,7 +5,7 @@ class ContatoLista extends React.Component {
         return(
             contatos.map(x => { // para cado contato x, retornar o JSX abaixo
                 return (
-                    <tr>
+                    <tr key={x.ContatoId}>
                         <td>{x.Nome}</td>
                         <td>{x.Numero}</td>
                     </tr>
@@ -32,7 +32,7 @@ class ContatoLista extends React.Component {
 
     render() {
         return (
-            <div className='ui-container'>
+            <div className='ui container'>
                 <h1>Contatos</h1>
                 {this.renderLista()}
             </div>
