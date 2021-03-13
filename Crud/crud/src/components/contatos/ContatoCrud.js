@@ -4,11 +4,16 @@ import React from 'react';
 import ContatoLista from './ContatoLista';
 
 class ContatoCrud extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { objetos: contatos }; // contatos no estado do objeto
+    }
+    
     render() {
         return (
             <div>
                 <h1>Contatos</h1>
-                <ContatoLista objetos={contatos}/>
+                <ContatoLista objetos={this.state.objetos}/>
             </div>
         );
     }
