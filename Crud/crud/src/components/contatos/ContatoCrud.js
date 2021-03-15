@@ -31,7 +31,7 @@ class ContatoCrud extends React.Component {
             )
         } 
         else if (this.state.status === ETipoAcao.consultando) {
-            return <ContatoConsulta/>;
+            return <ContatoConsulta objeto={this.state.objetoSelecionado}/>;
         } 
         else {
             return <div></div>;
