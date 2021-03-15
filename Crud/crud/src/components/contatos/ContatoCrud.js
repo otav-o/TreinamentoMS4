@@ -21,6 +21,28 @@ class ContatoCrud extends React.Component {
         // mudar estado da propriedade somente com o setState
     };
 
+    alterar = (objeto) => { // mostra a tela
+        this.setState({objetoSelecionado: objeto, status: ETipoAcao.alterando});
+    };
+
+    salvarAlteracao = (objeto) => {
+        let objetoNoVetor = null;
+        const objetos = this.state.objetos;
+
+        for (var i = 0; i < objetos.length; i++) {
+            if (objeto[i].ContatoId === objeto.ContatoId) {
+                objetoNoVetor = objetos[i];
+            } // achar o objeto de mesmo id
+        }
+
+        if (objetoNoVetor !== null) { // mudar as propriedades
+            objetoNoVetor.Nome = objeto.Nome;
+            objetoNoVetor.Numero = objeto.Numero;
+        }
+
+        this.setState({ objetos: objetos });
+    };
+
     voltar = () => {
         this.setState({status: ETipoAcao.listando});
     }
