@@ -5,19 +5,19 @@ class ContatoConsulta extends React.Component {
         return (
             <form>
                 <div className="ui form">
-                    <div className="two fields">
-                        <div className="disabled field">
+                    <div>
+                        <div>
                             <label>Nome</label>
-                            <input value="Bob Esponja" placeholder="Read Only" type="text" disabled="" tabindex="-1"></input>
+                            <input className='disabled field' value="Bob Esponja" placeholder="Read Only" type="text" disabled="" tabindex="-1"></input>
                         </div>
-                        <div className="disabled field">
+                        <div>
                             <label>Número</label>
-                            <input value='55 99999-9999' placeholder="Disabled" type="text" disabled="" tabindex="-1"></input>
+                            <input className='disabled field' value='55 99999-9999' placeholder="Disabled" type="text" disabled="" tabindex="-1"></input>
                         </div>
                     </div>
                 </div>
             </form>
-    );
+        );
     }
 }
 
