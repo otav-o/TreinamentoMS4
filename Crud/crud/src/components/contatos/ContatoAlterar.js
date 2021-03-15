@@ -1,10 +1,11 @@
 import React from 'react';
 
 class ContatoAlterar extends React.Component {
+
+    salvar = (e) => { console.log(e); }
+
     render () {
         const obj = this.props.objeto;
-
-        salvar = (e) => { console.log(e); }
         return (
             <div>
                 <button onClick={()=>{this.props.voltar()}} className='tiny ui grey button'>Voltar</button>
@@ -19,11 +20,11 @@ class ContatoAlterar extends React.Component {
                             <input defaultValue={this.props.objeto.Numero} type="text"/>
                         </div>
                     </div>
-                    <button onClick={()=>{this.salvar()}} className='tiny ui green button'>Salvar Alterações</button>
+                    <button onClick={this.salvar} className='tiny ui green button'>Salvar Alterações</button>
                 </form>
             </div>
             );
     }
 }
 
-export default ContatoConsulta;
+export default ContatoAlterar;
