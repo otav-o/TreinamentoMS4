@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ContatoLista from './ContatoLista';
+import ContatoConsulta from './ContatoConsulta';
 
 class ContatoCrud extends React.Component {
     constructor(props) {
@@ -20,12 +21,29 @@ class ContatoCrud extends React.Component {
         // mudar estado da propriedade somente com o setState
     };
 
+    renderComponente() { // renderiza conforme o estado
+        if (this.state.status === ETipoAcao.listando) {
+            return (
+                <div>
+                    <button className='tiny ui green button'>Incluir</button>;
+                    <ContatoLista objetos={this.state.objetos} consultar={this.consultar}/>;
+                </div> // consultar: método passado como props para o ContatoLista que muda o objeto selecionado
+            )
+        } 
+        else if (this.state.status === ETipoAcao.consultando) {
+            return <ContatoConsulta/>;
+        } 
+        else {
+            return <div></div>;
+        }
+    }
+
     render() {
         return (
             <div>
                 <h1>Contatos</h1>
-                <button className='tiny ui green button'>Incluir</button>
-                <ContatoLista objetos={this.state.objetos} consultar={this.consultar}/>
+                {/* <ContatoLista objetos={this.state.objetos} consultar={this.consultar}/> */}
+                {this.renderComponente()}
             </div> // clique no ContatoLista tem efeito no ContatoCrud
         );
     }
