@@ -3,6 +3,7 @@
 import React from 'react';
 import ContatoLista from './ContatoLista';
 import ContatoConsulta from './ContatoConsulta';
+import ContatoAlterar from './ContatoAlterar';
 
 class ContatoCrud extends React.Component {
     constructor(props) {
@@ -52,12 +53,15 @@ class ContatoCrud extends React.Component {
             return (
                 <div>
                     <button className='tiny ui green button'>Incluir</button>;
-                    <ContatoLista objetos={this.state.objetos} consultar={this.consultar}/>;
+                    <ContatoLista objetos={this.state.objetos} consultar={this.consultar} alterar={this.alterar}/>;
                 </div> // consultar: método passado como props para o ContatoLista que muda o objeto selecionado
             )
         } 
         else if (this.state.status === ETipoAcao.consultando) {
             return <ContatoConsulta voltar={this.voltar} objeto={this.state.objetoSelecionado}/>; // passa o método voltar e um objeto
+        }
+        else if (this.state.status === ETipoAcao.alterando) {
+            return <ContatoAlterar voltar={this.voltar} objeto={this.state.objetoSelecionado}></ContatoAlterar>
         } 
         else {
             return <div></div>;
