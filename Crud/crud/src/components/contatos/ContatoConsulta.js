@@ -3,8 +3,10 @@ import React from 'react';
 class ContatoConsulta extends React.Component {
     render () {
         const obj = this.props.objeto;
-        
+
         return (
+          <div>
+            <button onClick={()=>{this.props.voltar()}} className='tiny ui grey button'>Voltar</button>
             <form>
                 <div className="ui form">
                     <div>
@@ -19,6 +21,7 @@ class ContatoConsulta extends React.Component {
                     </div>
                 </div>
             </form>
+          </div>
         );
     }
 }

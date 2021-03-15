@@ -21,6 +21,10 @@ class ContatoCrud extends React.Component {
         // mudar estado da propriedade somente com o setState
     };
 
+    voltar = () => {
+        this.setState({status: ETipoAcao.listando});
+    }
+
     renderComponente() { // renderiza conforme o estado
         if (this.state.status === ETipoAcao.listando) {
             return (
@@ -31,7 +35,7 @@ class ContatoCrud extends React.Component {
             )
         } 
         else if (this.state.status === ETipoAcao.consultando) {
-            return <ContatoConsulta objeto={this.state.objetoSelecionado}/>;
+            return <ContatoConsulta voltar={this.voltar} objeto={this.state.objetoSelecionado}/>; // passa o método voltar e um objeto
         } 
         else {
             return <div></div>;
