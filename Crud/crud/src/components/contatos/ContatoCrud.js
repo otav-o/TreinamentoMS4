@@ -31,7 +31,7 @@ class ContatoCrud extends React.Component {
         const objetos = this.state.objetos;
 
         for (var i = 0; i < objetos.length; i++) {
-            if (objeto[i].ContatoId === objeto.ContatoId) {
+            if (objetos[i].ContatoId === objetos.ContatoId) {
                 objetoNoVetor = objetos[i];
             } // achar o objeto de mesmo id
         }
@@ -41,7 +41,7 @@ class ContatoCrud extends React.Component {
             objetoNoVetor.Numero = objeto.Numero;
         }
 
-        this.setState({ objetos: objetos });
+        this.setState({ objetos: objetos, status: ETipoAcao.listando });
     };
 
     voltar = () => {
@@ -61,7 +61,7 @@ class ContatoCrud extends React.Component {
             return <ContatoConsulta voltar={this.voltar} objeto={this.state.objetoSelecionado}/>; // passa o método voltar e um objeto
         }
         else if (this.state.status === ETipoAcao.alterando) {
-            return <ContatoAlterar voltar={this.voltar} objeto={this.state.objetoSelecionado}></ContatoAlterar>
+            return <ContatoAlterar salvarAlteracao={this.salvarAlteracao} voltar={this.voltar} objeto={this.state.objetoSelecionado}></ContatoAlterar>
         } 
         else {
             return <div></div>;
