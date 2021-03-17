@@ -3,7 +3,7 @@
 import React from 'react';
 import ContatoLista from './ContatoLista';
 import ContatoConsulta from './ContatoConsulta';
-import ContatoAlterar from './ContatoAlterar';
+import ContatoAlterarIncluir from './ContatoAlterarIncluir';
 
 class ContatoCrud extends React.Component {
     constructor(props) {
@@ -76,7 +76,7 @@ class ContatoCrud extends React.Component {
             return <ContatoConsulta voltar={this.voltar} objeto={this.state.objetoSelecionado}/>; // passa o método voltar e um objeto
         }
         else if (this.state.status === ETipoAcao.alterando) {
-            return <ContatoAlterar salvarAlteracao={this.salvarAlteracao} voltar={this.voltar} objeto={this.state.objetoSelecionado}></ContatoAlterar>
+            return <ContatoAlterarIncluir salvarAlteracao={this.salvarAlteracao} voltar={this.voltar} objeto={this.state.objetoSelecionado}></ContatoAlterarIncluir>
         } 
         else {
             return <div></div>;

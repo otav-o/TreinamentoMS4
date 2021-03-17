@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ContatoAlterar extends React.Component {
+class ContatoAlterarIncluir extends React.Component {
 
     constructor(props) {
         super(props);
@@ -42,4 +42,4 @@ class ContatoAlterar extends React.Component {
     }
 }
 
-export default ContatoAlterar;
+export default ContatoAlterarIncluir;
