@@ -44,6 +44,21 @@ class ContatoCrud extends React.Component {
         this.setState({ objetos: objetos, status: ETipoAcao.listando });
     };
 
+    deletar = (id) => {
+        const objetos = this.state.objetos;
+        let indice = -1;
+        for (let i = 0; i < objetos.length; i++) {
+            if (objetos[i].ContatoId === id) {
+                indice = i;
+            }
+        }
+
+        if (indice >= 0)
+            objetos.splice(indice, 1); // indice, quantidade de elementos a serem removidos
+
+        this.setState({ objetos: objetos });
+    };
+
     voltar = () => {
         this.setState({status: ETipoAcao.listando});
     }
@@ -53,7 +68,7 @@ class ContatoCrud extends React.Component {
             return (
                 <div>
                     <button className='tiny ui green button'>Incluir</button>;
-                    <ContatoLista objetos={this.state.objetos} consultar={this.consultar} alterar={this.alterar}/>;
+                    <ContatoLista objetos={this.state.objetos} consultar={this.consultar} alterar={this.alterar} deletar={this.deletar}/>;
                 </div> // consultar: método passado como props para o ContatoLista que muda o objeto selecionado
             )
         } 

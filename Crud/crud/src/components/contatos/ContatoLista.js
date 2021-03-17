@@ -14,7 +14,7 @@ class ContatoLista extends React.Component {
                         <td>{x.Numero}</td>
                         <button onClick={()=>{this.props.consultar(x)}} className='tiny ui grey button'>Consultar</button>
                         <button onClick={()=>{this.props.alterar(x)}} className='tiny ui blue button'>Alterar</button>
-                        <button className='tiny ui red button'>Excluir</button>
+                        <button onClick={()=>{this.props.deletar(x.ContatoId)}} className='tiny ui red button'>Excluir</button>
                     </tr>
                 );
             })
