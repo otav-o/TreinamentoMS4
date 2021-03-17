@@ -26,6 +26,10 @@ class ContatoCrud extends React.Component {
         this.setState({objetoSelecionado: objeto, status: ETipoAcao.alterando});
     };
 
+    incluir = () => {
+        this.setState({ status: ETipoAcao.incluindo })
+    }
+
     salvarAlteracao = (objeto) => {
         let objetoNoVetor = null;
         const objetos = this.state.objetos;
@@ -59,6 +63,10 @@ class ContatoCrud extends React.Component {
         this.setState({ objetos: objetos });
     };
 
+    salvarInclusao = (obj) => {
+        this.setState({objetos: [...this.state.objetos, obj], status: ETipoAcao.listando}); // vetor vai ter todo o conteúdo do vetor anterior + obj
+    }
+
     voltar = () => {
         this.setState({status: ETipoAcao.listando});
     }
@@ -67,7 +75,7 @@ class ContatoCrud extends React.Component {
         if (this.state.status === ETipoAcao.listando) {
             return (
                 <div>
-                    <button className='tiny ui green button'>Incluir</button>;
+                    <button onClick={this.incluir} className='tiny ui green button'>Incluir</button>;
                     <ContatoLista objetos={this.state.objetos} consultar={this.consultar} alterar={this.alterar} deletar={this.deletar}/>;
                 </div> // consultar: método passado como props para o ContatoLista que muda o objeto selecionado
             )
@@ -77,7 +85,10 @@ class ContatoCrud extends React.Component {
         }
         else if (this.state.status === ETipoAcao.alterando) {
             return <ContatoAlterarIncluir salvarAlteracao={this.salvarAlteracao} voltar={this.voltar} objeto={this.state.objetoSelecionado}></ContatoAlterarIncluir>
-        } 
+        }
+        else if (this.state.status === ETipoAcao.incluindo) {
+            return <ContatoAlterarIncluir salvarAlteracao={this.salvarInclusao} voltar={this.voltar} objeto={{}}/>
+        }
         else {
             return <div></div>;
         }
