@@ -4,15 +4,25 @@ import React from 'react';
 import ContatoLista from './ContatoLista';
 import ContatoConsulta from './ContatoConsulta';
 import ContatoAlterarIncluir from './ContatoAlterarIncluir';
+import api from '../apis'; // como é a exportação padrão, (export default) náo precisa de chaves em {api}, pois só há uma possibilidade
 
 class ContatoCrud extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            objetos: contatos, 
+            objetos: [], 
             objetoSelecionado: null,
-            status: ETipoAcao.listando
+            status: ETipoAcao.carregando
         };
+    }
+
+    componentDidMount() { // api é o axios com aquela url (api\index.js)
+        api.get('/api/contato')
+        .then(result => {
+            console.log(result.data); // testar só com result
+            this.setState({objetos: result.data, status: ETipoAcao.listando});
+            // mudar para listando
+        });
     }
 
     consultar = (objeto) => {
@@ -90,7 +100,7 @@ class ContatoCrud extends React.Component {
             return <ContatoAlterarIncluir salvarAlteracao={this.salvarInclusao} voltar={this.voltar} objeto={{}}/>
         }
         else {
-            return <div></div>;
+            return <div>Carregando...</div>;
         }
     }
 
@@ -103,13 +113,7 @@ class ContatoCrud extends React.Component {
             </div> // clique no ContatoLista tem efeito no ContatoCrud
         );
     }
-} // passar o vetor como propriedade
-
-const contatos = [
-    { ContatoId: 'a', Nome: 'Ana', Numero: '(11)1111-1111' },
-    { ContatoId: 'b', Nome: 'Bruno', Numero: '(22)2222-2222' },
-    { ContatoId: 'C', Nome: 'Carlos', Numero: '(33)3333-3333' },
-];
+}
 
 const ETipoAcao = Object.freeze({ // "Como se fosse um Enum"
 	"carregando":1, 

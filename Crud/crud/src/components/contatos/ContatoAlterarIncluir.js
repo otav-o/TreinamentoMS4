@@ -28,11 +28,7 @@ class ContatoAlterarIncluir extends React.Component {
                     <div>
                         <div>
                             <label>Nome</label>
-                            <input onChange={(e) => this.alteraProp('Nome', e.target.value)} value={obj.Nome} type="text"></input>
-                        </div>
-                        <div>
-                            <label>Número</label>
-                            <input onChange={(e) => this.alteraProp('Número', e.target.value)} value={this.props.objeto.Numero} type="text"/>
+                            <input onChange={(e) => this.alteraProp('nome', e.target.value)} value={obj.nome} type="text"></input>
                         </div>
                     </div>
                     <button onClick={this.salvar} className='tiny ui green button'>Salvar Alterações</button>
