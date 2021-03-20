@@ -36,7 +36,11 @@ namespace ContatosApplication
             });
 
             services.AddDbContext<ContatosApplicationContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("ContatosApplicationContext")));
+                    options.UseSqlServer(
+                        Configuration.GetConnectionString("ContatosApplicationContext")            
+            ));
+
+            services.AddCors(); // libera o acesso à API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +52,11 @@ namespace ContatosApplication
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ContatosApplication v1"));
             }
+
+            app.UseCors(x => x
+                .AllowAnyOrigin() // estes métodos recebem e retornam o mesmo objeto (por isso é possível chamar em sequência)
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseHttpsRedirection();
 
