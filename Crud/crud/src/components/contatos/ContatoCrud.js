@@ -17,6 +17,10 @@ class ContatoCrud extends React.Component {
     }
 
     componentDidMount() { // api é o axios com aquela url (api\index.js)
+        this.consultarDados();
+    }
+
+    consultarDados = () => {
         api.get('/api/contato')
         .then(result => {
             console.log(result.data); // testar só com result
@@ -41,40 +45,36 @@ class ContatoCrud extends React.Component {
     }
 
     salvarAlteracao = (objeto) => {
-        let objetoNoVetor = null;
-        const objetos = this.state.objetos;
-
-        for (var i = 0; i < objetos.length; i++) {
-            if (objetos[i].ContatoId === objetos.ContatoId) {
-                objetoNoVetor = objetos[i];
-            } // achar o objeto de mesmo id
-        }
-
-        if (objetoNoVetor !== null) { // mudar as propriedades
-            objetoNoVetor.Nome = objeto.Nome;
-            objetoNoVetor.Numero = objeto.Numero;
-        }
-
-        this.setState({ objetos: objetos, status: ETipoAcao.listando });
+        api.put(`/api/contato/${objeto.contatoId}`, objeto)
+        .then(result => {
+            console.log(result.status)
+            if (result.status === 204) {
+                this.setState({status: ETipoAcao.carregando});
+                this.consultarDados()
+            }
+        });
     };
 
     deletar = (id) => {
-        const objetos = this.state.objetos;
-        let indice = -1;
-        for (let i = 0; i < objetos.length; i++) {
-            if (objetos[i].ContatoId === id) {
-                indice = i;
+        api.delete(`/api/contato/${id}`)
+        .then(result => {
+            console.log(result.status)
+            if (result.status === 204) {
+                this.setState({status: ETipoAcao.carregando});
+                this.consultarDados()
             }
-        }
-
-        if (indice >= 0)
-            objetos.splice(indice, 1); // indice, quantidade de elementos a serem removidos
-
-        this.setState({ objetos: objetos });
+        });
     };
 
     salvarInclusao = (obj) => {
-        this.setState({objetos: [...this.state.objetos, obj], status: ETipoAcao.listando}); // vetor vai ter todo o conteúdo do vetor anterior + obj
+        api.post('/api/contato', obj) // salvarAlteracao é put
+        .then(result => {
+            console.log(result.status)
+            if (result.status === 201) {// sucesso
+                this.setState({status: ETipoAcao.carregando});
+                this.consultarDados()
+            }
+        });
     }
 
     voltar = () => {
@@ -91,13 +91,13 @@ class ContatoCrud extends React.Component {
             )
         } 
         else if (this.state.status === ETipoAcao.consultando) {
-            return <ContatoConsulta voltar={this.voltar} objeto={this.state.objetoSelecionado}/>; // passa o método voltar e um objeto
+            return <ContatoConsulta voltar={this.voltar} id={this.state.objetoSelecionado.contatoId}/>; // passa o método voltar e um id
         }
         else if (this.state.status === ETipoAcao.alterando) {
-            return <ContatoAlterarIncluir salvarAlteracao={this.salvarAlteracao} voltar={this.voltar} objeto={this.state.objetoSelecionado}></ContatoAlterarIncluir>
+            return <ContatoAlterarIncluir salvarAlteracao={this.salvarAlteracao} incluindo={false} voltar={this.voltar} id={this.state.objetoSelecionado.contatoId}></ContatoAlterarIncluir>
         }
         else if (this.state.status === ETipoAcao.incluindo) {
-            return <ContatoAlterarIncluir salvarAlteracao={this.salvarInclusao} voltar={this.voltar} objeto={{}}/>
+            return <ContatoAlterarIncluir salvarAlteracao={this.salvarInclusao} incluindo={true} voltar={this.voltar}/>
         }
         else {
             return <div>Carregando...</div>;

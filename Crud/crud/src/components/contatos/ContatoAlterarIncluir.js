@@ -1,10 +1,25 @@
 import React from 'react';
+import api from '../apis';
 
 class ContatoAlterarIncluir extends React.Component {
 
-    constructor(props) {
+    constructor (props) {
         super(props);
-        this.state={objeto: props.objeto}
+
+        if (props.incluindo) {
+            this.state = {objeto: {}, carregando: false}; // para não fazer a requisição get a toa
+        } else {
+            this.state = {objeto: null, carregando: true};
+        } // se estiver incluindo, começar com o objeto em branco
+    }
+
+    componentDidMount() {
+        if (!this.props.incluindo) {
+            api.get(`api/contato/${this.props.id}`)
+            .then(result => {
+                this.setState({objeto: result.data, carregando: false})
+            });
+        }
     }
 
     salvar = (e) => { 
@@ -20,7 +35,12 @@ class ContatoAlterarIncluir extends React.Component {
     }
 
     render () {
-        const obj = this.props.objeto;
+        if (this.state.carregando) {
+            return <div>Carregando...</div>
+        }
+
+        const obj = this.state.objeto;
+
         return (
             <div>
                 <button onClick={()=>{this.props.voltar()}} className='tiny ui grey button'>Voltar</button>
