@@ -6,6 +6,7 @@ import App from './components/App';
 import ContatoCrud from './components/contatos/ContatoCrud';
 import ContatoAlterarIncluir from './components/contatos/ContatoAlterarIncluir';
 import ContatoConsulta from './components/contatos/ContatoConsulta';
+import ContatoDeleta from './components/contatos/ContatoDeleta';
 
 ReactDOM.render(
     (<Router history={history}>
@@ -14,5 +15,6 @@ ReactDOM.render(
         <Route path='/contato/novo/' exact={true} component={ContatoAlterarIncluir}/>
         <Route path='/contato/alterar/:id' exact={true} component={ContatoAlterarIncluir}/>
         <Route path='/contato/consultar/:id' exact={true} component={ContatoConsulta}/>
+        <Route path='/contato/deletar/:id' exact={true} component={ContatoDeleta}/>
     </Router>), document.querySelector('#root') // renderiza dentro da div root do index.html
     );

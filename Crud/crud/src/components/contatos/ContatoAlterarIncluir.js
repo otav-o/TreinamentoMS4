@@ -74,7 +74,8 @@ class ContatoAlterarIncluir extends React.Component {
 
         return (
             <div>
-                <button onClick={()=>{this.props.voltar()}} className='tiny ui grey button'>Voltar</button>
+                <h1>{this.state.incluindo?"Incluindo":"Alterando"}</h1>
+                <button onClick={()=>{history.push('/contato/')}} className='tiny ui grey button'>Voltar</button>
                 <form className="ui form">
                     <div>
                         <div>
