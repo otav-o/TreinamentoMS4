@@ -5,6 +5,7 @@ import ContatoLista from './ContatoLista';
 import ContatoConsulta from './ContatoConsulta';
 import ContatoAlterarIncluir from './ContatoAlterarIncluir';
 import api from '../apis'; // como é a exportação padrão, (export default) náo precisa de chaves em {api}, pois só há uma possibilidade
+import {Link} from 'react-router-dom';
 
 class ContatoCrud extends React.Component {
     constructor(props) {
@@ -44,16 +45,16 @@ class ContatoCrud extends React.Component {
         this.setState({ status: ETipoAcao.incluindo })
     }
 
-    salvarAlteracao = (objeto) => {
-        api.put(`/api/contato/${objeto.contatoId}`, objeto)
-        .then(result => {
-            console.log(result.status)
-            if (result.status === 204) {
-                this.setState({status: ETipoAcao.carregando});
-                this.consultarDados()
-            }
-        });
-    };
+    // salvarAlteracao = (objeto) => {
+    //     api.put(`/api/contato/${objeto.contatoId}`, objeto)
+    //     .then(result => {
+    //         console.log(result.status)
+    //         if (result.status === 204) {
+    //             this.setState({status: ETipoAcao.carregando});
+    //             this.consultarDados()
+    //         }
+    //     });
+    // };
 
     deletar = (id) => {
         api.delete(`/api/contato/${id}`)
@@ -66,16 +67,16 @@ class ContatoCrud extends React.Component {
         });
     };
 
-    salvarInclusao = (obj) => {
-        api.post('/api/contato', obj) // salvarAlteracao é put
-        .then(result => {
-            console.log(result.status)
-            if (result.status === 201) {// sucesso
-                this.setState({status: ETipoAcao.carregando});
-                this.consultarDados()
-            }
-        });
-    }
+    // salvarInclusao = (obj) => {
+    //     api.post('/api/contato', obj) // salvarAlteracao é put
+    //     .then(result => {
+    //         console.log(result.status)
+    //         if (result.status === 201) {// sucesso
+    //             this.setState({status: ETipoAcao.carregando});
+    //             this.consultarDados()
+    //         }
+    //     });
+    // }
 
     voltar = () => {
         this.setState({status: ETipoAcao.listando});
@@ -85,7 +86,7 @@ class ContatoCrud extends React.Component {
         if (this.state.status === ETipoAcao.listando) {
             return (
                 <div>
-                    <button onClick={this.incluir} className='tiny ui green button'>Incluir</button>;
+                    <Link to='/contato/novo' className='tiny ui green button'>Incluir</Link>;
                     <ContatoLista objetos={this.state.objetos} consultar={this.consultar} alterar={this.alterar} deletar={this.deletar}/>;
                 </div> // consultar: método passado como props para o ContatoLista que muda o objeto selecionado
             )
@@ -93,12 +94,12 @@ class ContatoCrud extends React.Component {
         else if (this.state.status === ETipoAcao.consultando) {
             return <ContatoConsulta voltar={this.voltar} id={this.state.objetoSelecionado.contatoId}/>; // passa o método voltar e um id
         }
-        else if (this.state.status === ETipoAcao.alterando) {
-            return <ContatoAlterarIncluir salvarAlteracao={this.salvarAlteracao} incluindo={false} voltar={this.voltar} id={this.state.objetoSelecionado.contatoId}></ContatoAlterarIncluir>
-        }
-        else if (this.state.status === ETipoAcao.incluindo) {
-            return <ContatoAlterarIncluir salvarAlteracao={this.salvarInclusao} incluindo={true} voltar={this.voltar}/>
-        }
+        // else if (this.state.status === ETipoAcao.alterando) {
+        //     return <ContatoAlterarIncluir salvarAlteracao={this.salvarAlteracao} incluindo={false} voltar={this.voltar} id={this.state.objetoSelecionado.contatoId}></ContatoAlterarIncluir>
+        // }
+        // else if (this.state.status === ETipoAcao.incluindo) {
+        //     return <ContatoAlterarIncluir salvarAlteracao={this.salvarInclusao} incluindo={true} voltar={this.voltar}/>
+        // }
         else {
             return <div>Carregando...</div>;
         }
