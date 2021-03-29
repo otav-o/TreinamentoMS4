@@ -1,5 +1,7 @@
 import React from 'react';
 import api from '../apis';
+import history from '../../history';
+
 
 class ContatoConsulta extends React.Component {
     constructor (props) {
@@ -8,7 +10,7 @@ class ContatoConsulta extends React.Component {
     }
 
     componentDidMount() {
-        api.get(`api/contato/${this.props.id}`) //, { params: {id: this.props.id } })
+        api.get(`api/contato/${this.props.match.params.id}`)
         .then(result => {
             this.setState({objeto: result.data, carregando: false})
         });
@@ -22,7 +24,8 @@ class ContatoConsulta extends React.Component {
 
         return (
           <div>
-            <button onClick={()=>{this.props.voltar()}} className='tiny ui grey button'>Voltar</button>
+            <h1>Consultando contato</h1>
+            <button onClick={()=>{history.push('/contato/')}} className='tiny ui grey button'>Voltar</button>
             <form>
                 <div className="ui form">
                     <div>
