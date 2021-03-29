@@ -12,7 +12,6 @@ class ContatoLista extends React.Component {
                     <tr key={x.contatoId}>
                         <td>{x.nome}</td>
                         <a href={`/contato/consultar/${x.contatoId}`} className='tiny ui gray button'>Consultar</a>
-                        {/* <button onClick={()=>{this.props.alterar(x)}} className='tiny ui blue button'>Alterar</button> */}
                         <a href={`/contato/alterar/${x.contatoId}`} className='tiny ui blue button'>Alterar</a>
                         <a href={(`/contato/deletar/${x.contatoId}`)} className='tiny ui red button'>Excluir</a>
                     </tr>
@@ -39,6 +38,3 @@ class ContatoLista extends React.Component {
 }
 
 export default ContatoLista;
-
-
-// representa uma lista de contatos

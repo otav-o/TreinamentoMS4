@@ -16,5 +16,5 @@ ReactDOM.render(
         <Route path='/contato/alterar/:id' exact={true} component={ContatoAlterarIncluir}/>
         <Route path='/contato/consultar/:id' exact={true} component={ContatoConsulta}/>
         <Route path='/contato/deletar/:id' exact={true} component={ContatoDeleta}/>
-    </Router>), document.querySelector('#root') // renderiza dentro da div root do index.html
+    </Router>), document.querySelector('#root')
     );

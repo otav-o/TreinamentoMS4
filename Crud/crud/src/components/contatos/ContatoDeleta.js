@@ -31,7 +31,7 @@ class ContatoDeleta extends React.Component {
         const obj = this.state.objeto;
 
         return (
-          <div>
+          <div className='ui container'>
               <h1>Excluindo contato</h1>
             <button onClick={()=>{history.push('/contato/')}} className='tiny ui grey button'>Voltar</button>
             <form>
