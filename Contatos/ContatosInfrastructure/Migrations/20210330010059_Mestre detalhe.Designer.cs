@@ -3,14 +3,16 @@ using ContatosInfrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ContatosInfrastructure.Migrations
 {
     [DbContext(typeof(ContatosApplicationContext))]
-    partial class ContatosApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20210330010059_Mestre detalhe")]
+    partial class Mestredetalhe
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

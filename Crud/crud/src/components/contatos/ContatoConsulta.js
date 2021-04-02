@@ -15,6 +15,19 @@ class ContatoConsulta extends React.Component {
             this.setState({objeto: result.data, carregando: false})
         });
     }
+
+    renderLinhas = () => {
+        return (
+            this.state.objeto.numeros.map(x => {
+                return (
+                    <tr key={x.contatoNumeroId}>
+                        <td>{x.numero}</td>
+                        <td>{x.tipoString}</td>
+                    </tr>
+                )
+            })
+        )
+    }
     
     render () {
         if (this.state.carregando) {
@@ -33,6 +46,20 @@ class ContatoConsulta extends React.Component {
                             <label>Nome</label>
                             <input className='disabled field' value={obj.nome} placeholder="Read Only" type="text" disabled="" tabindex="-1"></input>
                         </div>
+                    </div>
+                    <div>
+                        <h4>Números</h4>
+                        <table className='ui celled table'>
+                            <thead>
+                                <tr>
+                                    <th>Número</th>
+                                    <th>Tipo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.renderLinhas()}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </form>
